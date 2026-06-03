@@ -1,0 +1,365 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>A Blind Glass — a palimpsest reader for Tender Buttons</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;1,9..144,400;1,9..144,500&family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=Courier+Prime:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#e7dfce; --paper-2:#efe8d9; --paper-deep:#ddd2bb;
+    --ink:#211e18; --ink-soft:#5b5446;
+    --verdigris:#2c645a; --verdigris-glow:44,100,90;
+    --sienna:#9c4f2b; --sienna-glow:156,79,43;
+    --rule:color-mix(in srgb, var(--ink) 18%, transparent);
+    --lr:110px;
+  }
+  @media (max-width:880px){:root{--lr:84px}}
+  *{box-sizing:border-box}
+  html,body{margin:0}
+  html{-webkit-text-size-adjust:100%}
+  body{
+    background:var(--paper); color:var(--ink);
+    font-family:"EB Garamond",Georgia,serif;
+    font-size:clamp(17px,1.05rem + .25vw,21px); line-height:1.85;
+    overflow-x:hidden; cursor:default;
+  }
+  .grain,.vignette{position:fixed;inset:0;pointer-events:none;z-index:1}
+  .grain{opacity:.06;mix-blend-mode:multiply;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+  .vignette{background:radial-gradient(ellipse 120% 90% at 50% 30%, transparent 52%, rgba(33,30,24,.13) 100%)}
+
+  .wrap{position:relative;z-index:2;max-width:1180px;margin:0 auto;padding:clamp(28px,5vw,72px) clamp(20px,5vw,64px) 160px}
+  .mast{margin-bottom:clamp(34px,6vw,72px);max-width:64ch}
+  .kicker{font-family:"Courier Prime",monospace;font-size:.72rem;letter-spacing:.34em;text-transform:uppercase;color:var(--ink-soft);margin:0 0 1.1rem}
+  .title{font-family:"Fraunces",serif;font-weight:500;font-size:clamp(2.9rem,11vw,6.4rem);line-height:.92;letter-spacing:-.015em;margin:0;font-optical-sizing:auto}
+  .title em{font-style:italic;font-weight:400}
+  .lede{font-size:1.06rem;margin:1.4rem 0 0;max-width:52ch;color:#332f26}
+  .howto{font-family:"Courier Prime",monospace;font-size:.78rem;letter-spacing:.04em;color:var(--ink-soft);margin:1.4rem 0 0;display:flex;gap:.6em;align-items:baseline;flex-wrap:wrap}
+  .howto b{color:var(--verdigris);font-weight:700}
+
+  .stage{display:grid;grid-template-columns:minmax(0,60ch) 1fr;gap:clamp(28px,5vw,72px);align-items:start}
+  @media (max-width:880px){.stage{grid-template-columns:1fr}}
+  .reading{position:relative}
+  .section{font-family:"Courier Prime",monospace;font-size:.74rem;letter-spacing:.32em;text-transform:uppercase;color:var(--ink-soft);margin:3.2rem 0 .2rem;display:flex;align-items:center;gap:1rem}
+  .section:first-child{margin-top:0}
+  .section::after{content:"";flex:1;height:1px;background:var(--rule)}
+  .eyebrow{font-family:"Courier Prime",monospace;font-size:.78rem;letter-spacing:.12em;text-transform:uppercase;color:var(--ink);margin:1.8rem 0 .35rem;opacity:.78}
+  .passage{margin:0 0 .4rem;text-wrap:pretty}
+  .ellip{color:var(--ink-soft);padding:0 .15em;font-style:italic;opacity:.6}
+
+  .t{position:relative;border-bottom:1px dotted color-mix(in srgb, var(--ink) 24%, transparent);
+    transition:color .4s ease,border-color .4s ease,text-shadow .4s ease,transform .35s cubic-bezier(.2,.8,.2,1);transform:translateZ(0)}
+  .t.concept{--bleed:var(--verdigris);--glow:var(--verdigris-glow)}
+  .t.verb{--bleed:var(--sienna);--glow:var(--sienna-glow)}
+  .t.found{border-bottom-style:solid;border-bottom-color:color-mix(in srgb, var(--bleed) 42%, transparent)}
+  .t.active{color:var(--bleed);border-bottom-color:var(--bleed);text-shadow:0 0 22px rgba(var(--glow),.34);transform:scale(1.035);display:inline-block}
+  body.reveal .t{border-bottom-style:solid;border-bottom-color:color-mix(in srgb, var(--bleed) 40%, transparent);color:color-mix(in srgb, var(--bleed) 88%, var(--ink))}
+
+  .tag{position:fixed;z-index:60;pointer-events:none;transform:translate(-50%,-118%);opacity:0;transition:opacity .25s ease;text-align:center;white-space:nowrap}
+  .tag .tc{font-family:"Fraunces",serif;font-style:italic;font-weight:500;font-size:1.02rem;color:var(--tagbleed,var(--verdigris));display:block;line-height:1.05}
+  .tag .td{font-family:"Courier Prime",monospace;font-size:.64rem;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-soft);margin-top:.25em}
+  .tag.on{opacity:1}
+
+  .lens{position:fixed;left:0;top:0;z-index:55;width:calc(var(--lr)*2);height:calc(var(--lr)*2);border-radius:50%;
+    margin-left:calc(var(--lr)*-1);margin-top:calc(var(--lr)*-1);pointer-events:none;will-change:transform;
+    background:radial-gradient(circle at 38% 30%, rgba(255,253,247,.42), rgba(255,253,247,.10) 46%, rgba(255,253,247,0) 72%);
+    border:1px solid color-mix(in srgb, var(--ink) 50%, transparent);
+    box-shadow:inset 0 0 0 1.5px color-mix(in srgb, var(--paper-2) 80%, transparent),inset 0 0 26px rgba(33,30,24,.10),0 22px 46px -16px rgba(33,30,24,.5);
+    -webkit-backdrop-filter:brightness(1.045) saturate(1.07) contrast(1.015);backdrop-filter:brightness(1.045) saturate(1.07) contrast(1.015)}
+  .lens::before,.lens::after{content:"";position:absolute;inset:-1px;border-radius:50%;mix-blend-mode:screen;opacity:.5}
+  .lens::before{box-shadow:inset 1.5px 0 2px rgba(0,180,200,.5)}
+  .lens::after{box-shadow:inset -1.5px 0 2px rgba(220,40,70,.45)}
+  .lens .cross{position:absolute;left:50%;top:50%;width:14px;height:14px;margin:-7px 0 0 -7px;opacity:.5}
+  .lens .cross::before,.lens .cross::after{content:"";position:absolute;background:color-mix(in srgb, var(--ink) 55%, transparent)}
+  .lens .cross::before{left:50%;top:0;bottom:0;width:1px;margin-left:-.5px}
+  .lens .cross::after{top:50%;left:0;right:0;height:1px;margin-top:-.5px}
+  body.coarse .lens{pointer-events:auto;cursor:grab}
+  body.coarse .lens.drag{cursor:grabbing}
+
+  .gloss{position:sticky;top:clamp(20px,4vw,48px)}
+  .card{background:linear-gradient(180deg, var(--paper-2), var(--paper-deep));border:1px solid var(--rule);border-radius:2px;padding:1.5rem 1.5rem 1.25rem;box-shadow:0 1px 0 rgba(255,255,255,.4) inset,0 14px 30px -22px rgba(33,30,24,.6);position:relative}
+  .card::before{content:"";position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--cardbleed,transparent);transition:background .4s ease}
+  .g-kicker{font-family:"Courier Prime",monospace;font-size:.68rem;letter-spacing:.28em;text-transform:uppercase;color:var(--ink-soft);margin:0 0 1rem}
+  .g-concept{font-family:"Fraunces",serif;font-weight:500;font-size:1.7rem;line-height:1.08;margin:0;color:var(--cardbleed,var(--ink));font-style:italic;min-height:1.1em;transition:color .4s ease}
+  .g-word{font-family:"EB Garamond",serif;font-style:italic;font-size:1.04rem;color:var(--ink-soft);margin:.5rem 0 0}
+  .g-word b{font-style:normal;color:var(--ink)}
+  .g-meta{font-family:"Courier Prime",monospace;font-size:.74rem;letter-spacing:.02em;color:var(--ink);margin:1rem 0 0;line-height:1.5}
+  .g-meta .dt{color:var(--ink-soft)}
+  .g-gloss{margin:.85rem 0 0;font-size:1rem;line-height:1.6}
+  .g-chip{display:inline-block;font-family:"Courier Prime",monospace;font-size:.62rem;letter-spacing:.16em;text-transform:uppercase;padding:.28em .7em;border:1px solid var(--cardbleed,var(--rule));color:var(--cardbleed,var(--ink-soft));border-radius:99px;margin-top:1rem}
+  .g-empty{font-family:"EB Garamond",serif;font-style:italic;color:var(--ink-soft);font-size:1.05rem;margin:0}
+  .tally{margin-top:1.2rem;padding-top:1rem;border-top:1px solid var(--rule);font-family:"Courier Prime",monospace;font-size:.72rem;letter-spacing:.06em;color:var(--ink-soft);display:flex;justify-content:space-between;align-items:baseline;gap:1rem}
+  .tally .meter{flex:1;height:2px;background:var(--rule);position:relative;margin:0 .2rem;align-self:center}
+  .tally .meter i{position:absolute;left:0;top:0;bottom:0;width:0;background:var(--verdigris);transition:width .5s ease}
+  .tally .done{color:var(--verdigris);font-style:normal}
+  .controls{display:flex;gap:.6rem;margin-top:1rem;flex-wrap:wrap}
+  .btn{font-family:"Courier Prime",monospace;font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;background:transparent;color:var(--ink);border:1px solid var(--rule);padding:.6em .9em;border-radius:2px;cursor:pointer;transition:background .2s,border-color .2s}
+  .btn:hover{background:rgba(33,30,24,.05);border-color:color-mix(in srgb,var(--ink) 40%, transparent)}
+
+  .colophon{margin-top:5rem;padding-top:1.4rem;border-top:1px solid var(--rule);max-width:64ch;font-family:"Courier Prime",monospace;font-size:.72rem;letter-spacing:.03em;color:var(--ink-soft);line-height:1.7}
+  .legend{display:flex;gap:1.4rem;flex-wrap:wrap;margin-bottom:.9rem}
+  .legend span{display:inline-flex;align-items:center;gap:.5em}
+  .legend i{width:.8em;height:.8em;border-radius:2px;display:inline-block}
+  .sw-v{background:var(--verdigris)} .sw-s{background:var(--sienna)}
+  @media (prefers-reduced-motion:reduce){*{transition-duration:.001ms !important}.t.active{transform:none}}
+</style>
+</head>
+<body>
+<div class="grain"></div>
+<div class="vignette"></div>
+
+<div class="wrap">
+  <header class="mast">
+    <p class="kicker">A palimpsest reader · Gertrude Stein, <i>Tender Buttons</i>, 1914</p>
+    <h1 class="title">A Blind<br><em>Glass</em></h1>
+    <p class="lede">“A kind in glass and a cousin, a spectacle and nothing strange…” — Stein's first object is itself about seeing through glass. Pass the glass across her words and the philosophy buried in them rises to the surface.</p>
+    <p class="howto" id="howto"><b>→</b> <span id="howto-text">Move your cursor — the glass follows.</span></p>
+  </header>
+
+  <div class="stage">
+    <main class="reading">
+      <div id="passages"></div>
+      <p class="colophon">
+        <span class="legend">
+          <span><i class="sw-v"></i> concept</span>
+          <span><i class="sw-s"></i> a verb of thinking</span>
+        </span>
+        Terms and passages are read from an external <b>lexicon.json</b> — edit it to change the text, the tags, or the glosses without touching the code. Each word is keyed to the originating source of its idea, not a later reception. The two inks mark the two strata of the lexicon: the nouns of philosophy and the verbs of thinking. Text is public domain (Project Gutenberg #15396).
+      </p>
+    </main>
+
+    <aside class="gloss">
+      <div class="card" id="card">
+        <p class="g-kicker">Under the glass</p>
+        <div id="g-full" style="display:none">
+          <p class="g-concept" id="g-concept"></p>
+          <p class="g-word" id="g-word"></p>
+          <p class="g-meta" id="g-meta"></p>
+          <p class="g-gloss" id="g-gloss"></p>
+          <span class="g-chip" id="g-chip"></span>
+        </div>
+        <p class="g-empty" id="g-empty">Bring the glass over the page. Whatever passes beneath it will surface here.</p>
+        <div class="tally">
+          <span id="t-count">surfaced 0 / 0</span>
+          <span class="meter"><i id="t-meter"></i></span>
+        </div>
+        <div class="controls">
+          <button class="btn" id="btn-all">Surface everything</button>
+          <button class="btn" id="btn-clear">Clear</button>
+        </div>
+      </div>
+    </aside>
+  </div>
+</div>
+
+<div class="lens" id="lens"><span class="cross"></span></div>
+<div class="tag" id="tag"><span class="tc" id="tag-c"></span><span class="td" id="tag-d"></span></div>
+
+<script type="application/json" id="lexicon-data">
+{
+  "_about": "Lexicon for 'A Blind Glass'. Edit freely. Tag a word in a passage with [[word]]; give it a different entry id with [[visible text|id]]. Ids are matched lower-cased. type is 'concept' or 'verb'. Use … for an elision.",
+  "entries": {
+    "system":        {"c":"System",                       "s":"Spinoza, Ethics",                                      "d":"1677",            "g":"Knowledge ordered more geometrico — as a single deductive whole. Stein gives hers feeling.",                                  "t":"concept"},
+    "resembling":    {"c":"Resemblance",                   "s":"Hume, A Treatise of Human Nature",                     "d":"1739",            "g":"One of the three principles by which the mind associates its ideas.",                                                          "t":"concept"},
+    "difference":    {"c":"The Same & the Different",      "s":"Plato, Sophist",                                       "d":"c. 360 BCE",      "g":"Among the 'greatest kinds' that make it possible to say one thing differs from another.",                                      "t":"concept"},
+    "sight":         {"c":"Sight — theōria",               "s":"Plato, Republic — the sun analogy",                    "d":"c. 375 BCE",      "g":"Knowing modelled on seeing; the Good is to the mind what the sun is to the eye.",                                              "t":"verb"},
+    "reason":        {"c":"Reason",                        "s":"Kant, Critique of Pure Reason",                        "d":"1781",            "g":"The faculty of principles — and Leibniz's demand that for everything there be a sufficient reason.",                           "t":"concept"},
+    "negative":      {"c":"Negation",                      "s":"Spinoza → Hegel",                                      "d":"1674 / 1812",     "g":"'All determination is negation'; for Hegel the negative is what drives the dialectic.",                                        "t":"concept"},
+    "intention":     {"c":"Intentionality",               "s":"Brentano, Psychology from an Empirical Standpoint",    "d":"1874",            "g":"'Aboutness' — every mental act is directed at an object.",                                                                     "t":"concept"},
+    "substance":     {"c":"Substance — ousia",            "s":"Aristotle, Categories & Metaphysics",                  "d":"c. 350 BCE",      "g":"What underlies and persists. Stein lets hers be casually 'replaced'.",                                                         "t":"concept"},
+    "wondering":     {"c":"Wonder — thaumazein",          "s":"Plato, Theaetetus 155d",                               "d":"c. 369 BCE",      "g":"'Philosophy has no other beginning than this.' Iris, the messenger, is daughter of Wonder.",                                   "t":"verb"},
+    "means":         {"c":"Meaning — Sinn",               "s":"Frege, On Sense and Reference",                        "d":"1892",            "g":"Sense vs. reference: what an expression says against what it picks out. Stein's 'means' rarely arrives at its Y.",              "t":"verb"},
+    "feeling":       {"c":"Feeling",                       "s":"William James, The Principles of Psychology",          "d":"1890",            "g":"The continuous stream of consciousness — the grammar Stein learned to write from her teacher.",                                "t":"verb"},
+    "recognition":   {"c":"Recognition",                   "s":"Hegel, Phenomenology of Spirit",                       "d":"1807",            "g":"Self-consciousness won only by being recognised by another.",                                                                  "t":"concept"},
+    "recurrence":    {"c":"Eternal Recurrence",            "s":"Nietzsche, The Gay Science §341",                      "d":"1882",            "g":"To will every moment as returning, identically, forever.",                                                                     "t":"concept"},
+    "division":      {"c":"Division — diairesis",          "s":"Plato, Sophist & Phaedrus",                            "d":"c. 360 BCE",      "g":"Cutting a kind at its natural joints to reach its definition.",                                                                "t":"concept"},
+    "receptacle":    {"c":"The Receptacle — chōra",        "s":"Plato, Timaeus 49–52",                                 "d":"c. 360 BCE",      "g":"The formless 'nurse of all becoming' that receives the Forms.",                                                                "t":"concept"},
+    "symbol":        {"c":"Sign / Symbol",                 "s":"Augustine → Peirce",                                   "d":"c. 397 / 1900s",  "g":"A thing that stands, for an interpretant, in the place of another.",                                                           "t":"concept"},
+    "imitation":     {"c":"Imitation — mimesis",           "s":"Plato, Republic X",                                    "d":"c. 375 BCE",      "g":"Art as a copy of a copy, thrice removed from the Form.",                                                                        "t":"concept"},
+    "act":           {"c":"The Categorical Imperative",    "s":"Kant, Groundwork of the Metaphysics of Morals",        "d":"1785",            "g":"'Act only on a maxim you could will as universal law.' Stein keeps the form and empties the content.",                          "t":"concept"},
+    "truth":         {"c":"Truth",                         "s":"Aquinas → William James",                              "d":"c. 1270 / 1907",  "g":"Adequation of thought to thing — or, for James, simply what works.",                                                           "t":"concept"},
+    "fact":          {"c":"Fact",                          "s":"William James, Pragmatism",                            "d":"1907",            "g":"The hard particular against which an idea is cashed out and tested.",                                                           "t":"concept"},
+    "contradiction": {"c":"Contradiction",                 "s":"Aristotle → Hegel",                                    "d":"c. 350 BCE / 1812","g":"The firmest principle of all — or, for Hegel, the very engine of movement. Note Stein's 'both sides and the centre'.",        "t":"concept"},
+    "measure":       {"c":"Measure",                       "s":"Protagoras, via Plato's Theaetetus",                   "d":"c. 440 BCE",      "g":"'Of all things the measure is man.'",                                                                                          "t":"concept"},
+    "shows":         {"c":"Showing — apodeixis",           "s":"Aristotle, Posterior Analytics",                       "d":"c. 350 BCE",      "g":"Demonstration: proof that exhibits why a thing must be so. Stein keeps the showing, withholds the proof.",                      "t":"verb"},
+    "singularity":   {"c":"The Singular — haecceitas",     "s":"Duns Scotus, Ordinatio",                               "d":"c. 1300",         "g":"The 'thisness' that makes an individual just this one and no other.",                                                          "t":"concept"},
+    "suffering":     {"c":"Suffering",                     "s":"Schopenhauer, The World as Will and Representation",   "d":"1818",            "g":"Intrinsic to the striving Will; behind it, Leibniz's problem of evil.",                                                        "t":"concept"},
+    "religion":      {"c":"Religion",                      "s":"Hume → William James",                                 "d":"1779 / 1902",     "g":"Examined first as natural belief, then as varieties of experience.",                                                           "t":"concept"},
+    "justice":       {"c":"Justice",                       "s":"Plato, Republic",                                      "d":"c. 375 BCE",      "g":"The right ordering of the parts of the soul and of the city.",                                                                  "t":"concept"},
+    "likeness":      {"c":"Likeness — homoiōsis",          "s":"Plato, Theaetetus 176b",                               "d":"c. 369 BCE",      "g":"Becoming like the Forms — and 'becoming like god'.",                                                                            "t":"concept"},
+    "suppose":       {"c":"Supposing — hypothesis",        "s":"Plato, Meno & Phaedo",                                 "d":"c. 385 BCE",      "g":"To posit a ground 'placed under' the argument before it is secured. The master verb of the book.",                              "t":"verb"},
+    "giving":        {"c":"The Gift",                      "s":"Seneca, On Benefits",                                  "d":"c. 56 CE",        "g":"The ethics of giving, receiving, and return — here reduced to a bare oscillation.",                                            "t":"verb"}
+  },
+  "sections": [
+    {
+      "title": "Objects",
+      "passages": [
+        {"title":"A Carafe, that is a Blind Glass","text":"A kind in glass and a cousin, a spectacle and nothing strange a single hurt color and an arrangement in a [[system]] to pointing. All this and not ordinary, not unordered in not [[resembling]]. The [[difference]] is spreading."},
+        {"title":"A Piece of Coffee","text":"The [[sight]] of a [[reason]], the same sight slighter, the sight of a simpler [[negative]] answer, the same sore sounder, the [[intention]] to wishing, the same splendor, the same furniture."},
+        {"title":"A Box","text":"So then the order is that a white way of being round is something suggesting a pin and is it disappointing, it is not, it is so rudimentary to be analysed and see a fine [[substance]] strangely."},
+        {"title":"More","text":"[[Wondering]] so winningly in several kinds of oceans is the reason that makes red so regular and enthusiastic."},
+        {"title":"A Table","text":"A table [[means]] does it not my dear it means a whole steadiness. Is it likely that a change."}
+      ]
+    },
+    {
+      "title": "Food",
+      "passages": [
+        {"title":"Roastbeef","text":"In [[feeling]] there is resignation, in feeling there is [[recognition]], in feeling there is [[recurrence]] and entirely mistaken there is pinching. … Any time there is a surface there is a surface and every time there is a [[division]] there is a dividing."},
+        {"title":"Mutton","text":"Mud and water were not present and not any more of either. … A [[receptacle]] and a [[symbol]] and no monster were present and no more."},
+        {"title":"Breakfast","text":"An [[imitation]], more imitation, imitation succeed imitations."}
+      ]
+    },
+    {
+      "title": "Rooms",
+      "passages": [
+        {"title":"Rooms — the opening","text":"[[Act so that|act]] there is no use in a centre. A wide action is not a width. … The [[truth]] has come. There is a disturbance. … A [[fact]] is that when the place was replaced all was left that was stored. … There is a [[contradiction]] and naturally returning there comes to be both sides and the centre."},
+        {"title":"Rooms — the singular","text":"A [[measure]] is that which put up so that it [[shows]] the length has a steel construction. … is there a [[singularity]], and the singularity, why is there a question. … Why is there so much useless [[suffering]]. Why is there. … A [[religion]], almost a religion, any religion, a quintal in religion."},
+        {"title":"Rooms — the gift","text":"The care with which there is incredible [[justice]] and [[likeness]], all this makes a magnificent asparagus, and also a fountain. … [[Suppose]] they are put together, suppose that there is an interruption. … [[Giving it away|giving]], not giving it away, is there any difference."}
+      ]
+    }
+  ]
+}
+
+</script>
+
+<script>
+(async function(){
+  const FALLBACK = JSON.parse(document.getElementById('lexicon-data').textContent);
+  async function getLexicon(){
+    try{ const r = await fetch('lexicon.json',{cache:'no-store'}); if(!r.ok) throw 0; return await r.json(); }
+    catch(_){ return FALLBACK; }
+  }
+  const esc = s => s.replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+  function render(text){
+    let h = esc(text);
+    h = h.replace(/…/g,'<span class="ellip">…</span>');
+    h = h.replace(/\[\[([^\]]+)\]\]/g,(m,body)=>{
+      const p = body.split('|');
+      const visible = p[0].trim();
+      const id = (p[1]||p[0]).trim().toLowerCase();
+      return '<span class="t" data-id="'+id+'">'+visible+'</span>';
+    });
+    return h;
+  }
+
+  const lex = await getLexicon();
+  const ENTRIES = lex.entries || {};
+  const host = document.getElementById('passages');
+  (lex.sections||[]).forEach(sec=>{
+    const s=document.createElement('div'); s.className='section'; s.textContent=sec.title; host.appendChild(s);
+    (sec.passages||[]).forEach(p=>{
+      const e=document.createElement('p'); e.className='eyebrow'; e.textContent=p.title; host.appendChild(e);
+      const para=document.createElement('p'); para.className='passage'; para.innerHTML=render(p.text); host.appendChild(para);
+    });
+  });
+
+  const terms = Array.from(document.querySelectorAll('.t'));
+  terms.forEach(el=>{ const e=ENTRIES[el.dataset.id]; if(e) el.classList.add(e.t); });
+  const total = terms.length;
+
+  const lens=document.getElementById('lens'), tag=document.getElementById('tag'),
+        tagC=document.getElementById('tag-c'), tagD=document.getElementById('tag-d'),
+        full=document.getElementById('g-full'), empty=document.getElementById('g-empty'), card=document.getElementById('card'),
+        gC=document.getElementById('g-concept'), gW=document.getElementById('g-word'), gM=document.getElementById('g-meta'),
+        gG=document.getElementById('g-gloss'), gChip=document.getElementById('g-chip'),
+        tCount=document.getElementById('t-count'), tMeter=document.getElementById('t-meter');
+
+  // ---- input ----
+  let R = lens.offsetWidth/2 || 110;
+  let tx=window.innerWidth/2, ty=window.innerHeight*0.4, cx=tx, cy=ty, dragging=false;
+  const coarse = window.matchMedia('(hover: none) and (pointer: coarse)').matches;
+  document.body.classList.toggle('coarse', coarse);
+  document.getElementById('howto-text').textContent = coarse ? 'Drag the glass across the page.' : 'Move your cursor — the glass follows.';
+
+  // desktop: bulletproof follow via mousemove
+  window.addEventListener('mousemove', e=>{ tx=e.clientX; ty=e.clientY; });
+  // touch / pen: drag the glass
+  lens.addEventListener('pointerdown', e=>{ if(e.pointerType!=='mouse'){ dragging=true; lens.classList.add('drag'); tx=e.clientX; ty=e.clientY; try{lens.setPointerCapture(e.pointerId);}catch(_){} e.preventDefault(); } });
+  window.addEventListener('pointermove', e=>{ if(dragging && e.pointerType!=='mouse'){ tx=e.clientX; ty=e.clientY; e.preventDefault(); } }, {passive:false});
+  window.addEventListener('pointerup', ()=>{ dragging=false; lens.classList.remove('drag'); });
+  window.addEventListener('resize', ()=>{ R=lens.offsetWidth/2; });
+
+  if(coarse){
+    const fp=document.querySelector('.passage');
+    if(fp){ const r=fp.getBoundingClientRect(); tx=r.left+Math.min(r.width*0.5,120); ty=r.top+22; cx=tx; cy=ty; }
+  }
+
+  const found=new Set(); let lastFocus=null, revealAll=false;
+
+  function setGloss(el){
+    const e=ENTRIES[el.dataset.id]; if(!e) return;
+    full.style.display='block'; empty.style.display='none';
+    const bleed = e.t==='verb' ? 'var(--sienna)' : 'var(--verdigris)';
+    card.style.setProperty('--cardbleed', bleed);
+    gC.textContent=e.c;
+    gW.innerHTML='Stein: &ldquo;<b>'+esc(el.textContent)+'</b>&rdquo;';
+    gM.innerHTML=esc(e.s)+' <span class="dt">· '+esc(e.d)+'</span>';
+    gG.textContent=e.g;
+    gChip.textContent = e.t==='verb' ? 'a verb of thinking' : 'concept';
+  }
+  function updateTally(){
+    const n = revealAll ? total : found.size;
+    if(total && n>=total){ tCount.innerHTML='<span class="done">the whole collection made — '+total+' / '+total+'</span>'; }
+    else { tCount.textContent='surfaced '+n+' / '+total; }
+    tMeter.style.width=(total?(n/total*100):0)+'%';
+  }
+  updateTally();
+
+  function frame(){
+    cx += (tx-cx)*0.18; cy += (ty-cy)*0.18;
+    lens.style.transform='translate('+cx+'px,'+cy+'px)';
+
+    let focus=null, fd=1e9;
+    if(!revealAll){
+      for(const el of terms){
+        const r=el.getBoundingClientRect();
+        const ex=r.left+r.width/2, ey=r.top+r.height/2;
+        const d=Math.hypot(cx-ex, cy-ey);
+        const inside = d < R;
+        el.classList.toggle('active', inside);
+        if(inside){
+          const id=el.dataset.id;
+          if(!found.has(id)){ found.add(id); el.classList.add('found'); updateTally(); }
+          if(d<fd){ fd=d; focus=el; }
+        }
+      }
+    }
+
+    if(focus && focus!==lastFocus){
+      const e=ENTRIES[focus.dataset.id]; setGloss(focus);
+      tagC.textContent=e.c; tagD.textContent=e.d;
+      tag.style.setProperty('--tagbleed', e.t==='verb'?'var(--sienna)':'var(--verdigris)');
+      lastFocus=focus;
+    }
+    if(focus){
+      const r=focus.getBoundingClientRect();
+      let px=Math.max(70,Math.min(window.innerWidth-70, r.left+r.width/2));
+      let py=Math.max(34, r.top);
+      tag.style.left=px+'px'; tag.style.top=py+'px'; tag.classList.add('on');
+    } else if(!revealAll){ tag.classList.remove('on'); }
+
+    requestAnimationFrame(frame);
+  }
+  requestAnimationFrame(frame);
+
+  document.getElementById('btn-all').addEventListener('click', ()=>{
+    revealAll=true; document.body.classList.add('reveal');
+    terms.forEach(el=>{ el.classList.add('found'); el.classList.remove('active'); found.add(el.dataset.id); });
+    tag.classList.remove('on'); updateTally();
+    if(terms[0]) setGloss(terms[0]);
+  });
+  document.getElementById('btn-clear').addEventListener('click', ()=>{
+    revealAll=false; document.body.classList.remove('reveal');
+    found.clear(); lastFocus=null;
+    terms.forEach(el=>el.classList.remove('found','active'));
+    full.style.display='none'; empty.style.display='block';
+    card.style.removeProperty('--cardbleed'); tag.classList.remove('on');
+    updateTally();
+  });
+})();
+</script>
+</body>
+</html>
