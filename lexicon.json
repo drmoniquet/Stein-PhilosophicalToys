@@ -1,0 +1,63 @@
+{
+  "_about": "Lexicon for 'A Blind Glass'. Edit freely. Tag a word in a passage with [[word]]; give it a different entry id with [[visible text|id]]. Ids are matched lower-cased. type is 'concept' or 'verb'. Use … for an elision.",
+  "entries": {
+    "system":        {"c":"System",                       "s":"Spinoza, Ethics",                                      "d":"1677",            "g":"Knowledge ordered more geometrico — as a single deductive whole. Stein gives hers feeling.",                                  "t":"concept"},
+    "resembling":    {"c":"Resemblance",                   "s":"Hume, A Treatise of Human Nature",                     "d":"1739",            "g":"One of the three principles by which the mind associates its ideas.",                                                          "t":"concept"},
+    "difference":    {"c":"The Same & the Different",      "s":"Plato, Sophist",                                       "d":"c. 360 BCE",      "g":"Among the 'greatest kinds' that make it possible to say one thing differs from another.",                                      "t":"concept"},
+    "sight":         {"c":"Sight — theōria",               "s":"Plato, Republic — the sun analogy",                    "d":"c. 375 BCE",      "g":"Knowing modelled on seeing; the Good is to the mind what the sun is to the eye.",                                              "t":"verb"},
+    "reason":        {"c":"Reason",                        "s":"Kant, Critique of Pure Reason",                        "d":"1781",            "g":"The faculty of principles — and Leibniz's demand that for everything there be a sufficient reason.",                           "t":"concept"},
+    "negative":      {"c":"Negation",                      "s":"Spinoza → Hegel",                                      "d":"1674 / 1812",     "g":"'All determination is negation'; for Hegel the negative is what drives the dialectic.",                                        "t":"concept"},
+    "intention":     {"c":"Intentionality",               "s":"Brentano, Psychology from an Empirical Standpoint",    "d":"1874",            "g":"'Aboutness' — every mental act is directed at an object.",                                                                     "t":"concept"},
+    "substance":     {"c":"Substance — ousia",            "s":"Aristotle, Categories & Metaphysics",                  "d":"c. 350 BCE",      "g":"What underlies and persists. Stein lets hers be casually 'replaced'.",                                                         "t":"concept"},
+    "wondering":     {"c":"Wonder — thaumazein",          "s":"Plato, Theaetetus 155d",                               "d":"c. 369 BCE",      "g":"'Philosophy has no other beginning than this.' Iris, the messenger, is daughter of Wonder.",                                   "t":"verb"},
+    "means":         {"c":"Meaning — Sinn",               "s":"Frege, On Sense and Reference",                        "d":"1892",            "g":"Sense vs. reference: what an expression says against what it picks out. Stein's 'means' rarely arrives at its Y.",              "t":"verb"},
+    "feeling":       {"c":"Feeling",                       "s":"William James, The Principles of Psychology",          "d":"1890",            "g":"The continuous stream of consciousness — the grammar Stein learned to write from her teacher.",                                "t":"verb"},
+    "recognition":   {"c":"Recognition",                   "s":"Hegel, Phenomenology of Spirit",                       "d":"1807",            "g":"Self-consciousness won only by being recognised by another.",                                                                  "t":"concept"},
+    "recurrence":    {"c":"Eternal Recurrence",            "s":"Nietzsche, The Gay Science §341",                      "d":"1882",            "g":"To will every moment as returning, identically, forever.",                                                                     "t":"concept"},
+    "division":      {"c":"Division — diairesis",          "s":"Plato, Sophist & Phaedrus",                            "d":"c. 360 BCE",      "g":"Cutting a kind at its natural joints to reach its definition.",                                                                "t":"concept"},
+    "receptacle":    {"c":"The Receptacle — chōra",        "s":"Plato, Timaeus 49–52",                                 "d":"c. 360 BCE",      "g":"The formless 'nurse of all becoming' that receives the Forms.",                                                                "t":"concept"},
+    "symbol":        {"c":"Sign / Symbol",                 "s":"Augustine → Peirce",                                   "d":"c. 397 / 1900s",  "g":"A thing that stands, for an interpretant, in the place of another.",                                                           "t":"concept"},
+    "imitation":     {"c":"Imitation — mimesis",           "s":"Plato, Republic X",                                    "d":"c. 375 BCE",      "g":"Art as a copy of a copy, thrice removed from the Form.",                                                                        "t":"concept"},
+    "act":           {"c":"The Categorical Imperative",    "s":"Kant, Groundwork of the Metaphysics of Morals",        "d":"1785",            "g":"'Act only on a maxim you could will as universal law.' Stein keeps the form and empties the content.",                          "t":"concept"},
+    "truth":         {"c":"Truth",                         "s":"Aquinas → William James",                              "d":"c. 1270 / 1907",  "g":"Adequation of thought to thing — or, for James, simply what works.",                                                           "t":"concept"},
+    "fact":          {"c":"Fact",                          "s":"William James, Pragmatism",                            "d":"1907",            "g":"The hard particular against which an idea is cashed out and tested.",                                                           "t":"concept"},
+    "contradiction": {"c":"Contradiction",                 "s":"Aristotle → Hegel",                                    "d":"c. 350 BCE / 1812","g":"The firmest principle of all — or, for Hegel, the very engine of movement. Note Stein's 'both sides and the centre'.",        "t":"concept"},
+    "measure":       {"c":"Measure",                       "s":"Protagoras, via Plato's Theaetetus",                   "d":"c. 440 BCE",      "g":"'Of all things the measure is man.'",                                                                                          "t":"concept"},
+    "shows":         {"c":"Showing — apodeixis",           "s":"Aristotle, Posterior Analytics",                       "d":"c. 350 BCE",      "g":"Demonstration: proof that exhibits why a thing must be so. Stein keeps the showing, withholds the proof.",                      "t":"verb"},
+    "singularity":   {"c":"The Singular — haecceitas",     "s":"Duns Scotus, Ordinatio",                               "d":"c. 1300",         "g":"The 'thisness' that makes an individual just this one and no other.",                                                          "t":"concept"},
+    "suffering":     {"c":"Suffering",                     "s":"Schopenhauer, The World as Will and Representation",   "d":"1818",            "g":"Intrinsic to the striving Will; behind it, Leibniz's problem of evil.",                                                        "t":"concept"},
+    "religion":      {"c":"Religion",                      "s":"Hume → William James",                                 "d":"1779 / 1902",     "g":"Examined first as natural belief, then as varieties of experience.",                                                           "t":"concept"},
+    "justice":       {"c":"Justice",                       "s":"Plato, Republic",                                      "d":"c. 375 BCE",      "g":"The right ordering of the parts of the soul and of the city.",                                                                  "t":"concept"},
+    "likeness":      {"c":"Likeness — homoiōsis",          "s":"Plato, Theaetetus 176b",                               "d":"c. 369 BCE",      "g":"Becoming like the Forms — and 'becoming like god'.",                                                                            "t":"concept"},
+    "suppose":       {"c":"Supposing — hypothesis",        "s":"Plato, Meno & Phaedo",                                 "d":"c. 385 BCE",      "g":"To posit a ground 'placed under' the argument before it is secured. The master verb of the book.",                              "t":"verb"},
+    "giving":        {"c":"The Gift",                      "s":"Seneca, On Benefits",                                  "d":"c. 56 CE",        "g":"The ethics of giving, receiving, and return — here reduced to a bare oscillation.",                                            "t":"verb"}
+  },
+  "sections": [
+    {
+      "title": "Objects",
+      "passages": [
+        {"title":"A Carafe, that is a Blind Glass","text":"A kind in glass and a cousin, a spectacle and nothing strange a single hurt color and an arrangement in a [[system]] to pointing. All this and not ordinary, not unordered in not [[resembling]]. The [[difference]] is spreading."},
+        {"title":"A Piece of Coffee","text":"The [[sight]] of a [[reason]], the same sight slighter, the sight of a simpler [[negative]] answer, the same sore sounder, the [[intention]] to wishing, the same splendor, the same furniture."},
+        {"title":"A Box","text":"So then the order is that a white way of being round is something suggesting a pin and is it disappointing, it is not, it is so rudimentary to be analysed and see a fine [[substance]] strangely."},
+        {"title":"More","text":"[[Wondering]] so winningly in several kinds of oceans is the reason that makes red so regular and enthusiastic."},
+        {"title":"A Table","text":"A table [[means]] does it not my dear it means a whole steadiness. Is it likely that a change."}
+      ]
+    },
+    {
+      "title": "Food",
+      "passages": [
+        {"title":"Roastbeef","text":"In [[feeling]] there is resignation, in feeling there is [[recognition]], in feeling there is [[recurrence]] and entirely mistaken there is pinching. … Any time there is a surface there is a surface and every time there is a [[division]] there is a dividing."},
+        {"title":"Mutton","text":"Mud and water were not present and not any more of either. … A [[receptacle]] and a [[symbol]] and no monster were present and no more."},
+        {"title":"Breakfast","text":"An [[imitation]], more imitation, imitation succeed imitations."}
+      ]
+    },
+    {
+      "title": "Rooms",
+      "passages": [
+        {"title":"Rooms — the opening","text":"[[Act so that|act]] there is no use in a centre. A wide action is not a width. … The [[truth]] has come. There is a disturbance. … A [[fact]] is that when the place was replaced all was left that was stored. … There is a [[contradiction]] and naturally returning there comes to be both sides and the centre."},
+        {"title":"Rooms — the singular","text":"A [[measure]] is that which put up so that it [[shows]] the length has a steel construction. … is there a [[singularity]], and the singularity, why is there a question. … Why is there so much useless [[suffering]]. Why is there. … A [[religion]], almost a religion, any religion, a quintal in religion."},
+        {"title":"Rooms — the gift","text":"The care with which there is incredible [[justice]] and [[likeness]], all this makes a magnificent asparagus, and also a fountain. … [[Suppose]] they are put together, suppose that there is an interruption. … [[Giving it away|giving]], not giving it away, is there any difference."}
+      ]
+    }
+  ]
+}
