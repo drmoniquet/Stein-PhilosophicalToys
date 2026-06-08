@@ -21,6 +21,5 @@ git commit -m "add artist statement"
 
 git add build_docx.js a-blind-glass-lexicon.docx
 git commit -m "script to spit out an editable .docx from the lexicon"
-
-# then the touch fix 
+ 
 git commit -am "fix: glass wouldn't drag on iphone — needed touch-action:none (safari steals it as a scroll)"
