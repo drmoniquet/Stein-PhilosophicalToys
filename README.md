@@ -9,10 +9,11 @@ Other philosophical Stein toys Monique has made include "In There, Behind the Do
 
 
 **Notes:**
-**Fonts: **
+Fonts:
 - Fraunces:  https://fonts.google.com/specimen/Fraunces 
 - EB Garamond: https://fonts.google.com/specimen/EB+Garamond
 - Courier Prime:  https://fonts.google.com/specimen/Courier+Prime 
+
 **Sources:**
 We tried to find free online sources for all references, and list sources that informed Monique's thinking in the bibliography.  
 
