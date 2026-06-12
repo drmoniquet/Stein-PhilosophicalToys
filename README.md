@@ -14,10 +14,11 @@ Other philosophical Stein toys Monique has made include "In There, Behind the Do
 
 **Notes:**
 Fonts:
-- Libre Caslon Text (400/700/italic) and Libre Caslon Display, which are what Stein used when she published Tender Buttons with Claire Marie in 1914.
-- Fraunces:  https://fonts.google.com/specimen/Fraunces 
-- EB Garamond: https://fonts.google.com/specimen/EB+Garamond
-- Courier Prime:  https://fonts.google.com/specimen/Courier+Prime 
+- The bulk of the project is published in Libre Caslon Text and Libre Caslon Display, which are what Stein used when she published _Tender Buttons_ with Claire Marie in 1914.
+- EB Garamond was used for the Greek characters https://fonts.google.com/specimen/EB+Garamond
+
+**Blind glass**
+Whatever sits under the glass now bends and ripples slightly, the way a text looks through an old hand-blown lens. We made the experience of looking through glass using turbulence. https://www.smashingmagazine.com/2021/09/deep-dive-wonderful-world-svg-displacement-filtering/ (feTurbulence) was used to generate soft noise → feDisplacementMap warping the backdrop by it), applied to the lens as backdrop-filter: url(#glassRipple).
 
 **Sources:**
 We tried to find free online sources for all references, and list sources that informed Monique's thinking in the bibliography.  
