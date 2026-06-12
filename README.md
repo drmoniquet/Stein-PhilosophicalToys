@@ -6,12 +6,15 @@ These philosophical toys, created by Monique Tschofen and George Pechtol, test G
 
 Other philosophical Stein toys Monique has made include "In There, Behind the Door" https://scalar.usc.edu/works/in-there-behind-the-door-an-exhibition-of-deformances-of-gertrude-stein/index and "Careless Water | Streams of (Artificial) Thought" https://arcg.is/05GXOe0 
 
-Monique Tschofen is Professor of English at Toronto Metropolitan University. Find her at https://sites.google.com/view/moniquetschofen/ 
+
 
 **Notes:**
 **Fonts: **
-Fraunces:  https://fonts.google.com/specimen/Fraunces 
-EB Garamond: https://fonts.google.com/specimen/EB+Garamond
-Courier Prime:  https://fonts.google.com/specimen/Courier+Prime 
+- Fraunces:  https://fonts.google.com/specimen/Fraunces 
+- EB Garamond: https://fonts.google.com/specimen/EB+Garamond
+- Courier Prime:  https://fonts.google.com/specimen/Courier+Prime 
 **Sources:**
 We tried to find free online sources for all references, and list sources that informed Monique's thinking in the bibliography.  
+
+
+Monique Tschofen is Professor of English at Toronto Metropolitan University. Find her at https://sites.google.com/view/moniquetschofen/ 
