@@ -6,7 +6,7 @@ These philosophical toys, created by Monique Tschofen and George Pechtol, test G
 
 George and Monique asked how can we see this pattern of intertextual allusion at work?
 
-To this moment, we have completed 11 of the 58 poems in *Objects* ("A Carafe," "Glazed Glitter," "A Substance in a Cushion," "A Box," "A Piece of Coffee," "A Seltzer Bottle," "Mildred's Umbrella," "A Chair," "More," "Malachite, and "A Table"); 4 snippets of pieces  from *Food*'s 43 poems ("Roastbeef," "Mutton," "Breakfast," "Milk"), and only 15 fragments of the single continuous poem *Rooms*. 
+To this moment, we have completed 11 of the 58 poems in *Objects* ("A Carafe," "Glazed Glitter," "A Substance in a Cushion," "A Box," "A Piece of Coffee," "A Seltzer Bottle," "Mildred's Umbrella," "A Chair," "More," "Malachite, and "A Table"); 4 snippets of pieces  from *Food*'s 43 poems ("Roastbeef," "Mutton," "Breakfast," "Milk"), and 15 fragments of the single continuous poem *Rooms*. This project will be expanded as we have time. The goal, however, isn't a footnoted critical edition of Stein's radical poetry, but rather an experimental demo of what lives inside it. The metaphor of her final section ROOMS and all the containers, carafes, cups, etc. that are held in the poem's spaces is therefore apt; Stein invites us to peer in and move through the spaces.      
 
 Other philosophical Stein toys Monique has made include "In There, Behind the Door" https://scalar.usc.edu/works/in-there-behind-the-door-an-exhibition-of-deformances-of-gertrude-stein/index and "Careless Water | Streams of (Artificial) Thought" https://arcg.is/05GXOe0 
 
