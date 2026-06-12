@@ -14,6 +14,7 @@ Other philosophical Stein toys Monique has made include "In There, Behind the Do
 
 **Notes:**
 Fonts:
+- Libre Caslon Text (400/700/italic) and Libre Caslon Display, which are what Stein used when she published Tender Buttons with Claire Marie in 1914.
 - Fraunces:  https://fonts.google.com/specimen/Fraunces 
 - EB Garamond: https://fonts.google.com/specimen/EB+Garamond
 - Courier Prime:  https://fonts.google.com/specimen/Courier+Prime 
