@@ -10,18 +10,16 @@ To this moment, we have completed 11 of the 58 poems in *Objects* ("A Carafe," "
 
 Other philosophical Stein toys Monique has made include "In There, Behind the Door" https://scalar.usc.edu/works/in-there-behind-the-door-an-exhibition-of-deformances-of-gertrude-stein/index and "Careless Water | Streams of (Artificial) Thought" https://arcg.is/05GXOe0 
 
-
-
-**Notes:**
+**Design Notes:**
 Fonts:
-- The bulk of the project is published in Libre Caslon Text and Libre Caslon Display, which are what Stein used when she published _Tender Buttons_ with Claire Marie in 1914.
-- EB Garamond was used for the Greek characters https://fonts.google.com/specimen/EB+Garamond
+- The bulk of the project is published in Libre Caslon Text and Libre Caslon Display, which are what Stein used when she published _Tender Buttons_ with Claire Marie in 1914. (You can see that edition here: https://archive.org/details/tenderbuttonsobj00steirich/page/n7/mode/2up?ref=ol)
+- EB Garamond was used for the Greek characters and some editorial apparatus https://fonts.google.com/specimen/EB+Garamond
 
-**Blind glass**
-Whatever sits under the glass now bends and ripples slightly, the way a text looks through an old hand-blown lens. We made the experience of looking through glass using turbulence. https://www.smashingmagazine.com/2021/09/deep-dive-wonderful-world-svg-displacement-filtering/ (feTurbulence) was used to generate soft noise → feDisplacementMap warping the backdrop by it), applied to the lens as backdrop-filter: url(#glassRipple).
+**The "blind" glass**
+Whatever sits under the glass bends and ripples slightly, the way a text looks through an old hand-blown lens. We made the experience of looking through glass using turbulence: https://www.smashingmagazine.com/2021/09/deep-dive-wonderful-world-svg-displacement-filtering/ (feTurbulence) was used to generate soft noise → feDisplacementMap warping the backdrop by it), applied to the lens as backdrop-filter: url(#glassRipple).
 
 **Sources:**
-We tried to find free online sources for all references, and list sources that informed Monique's thinking in the bibliography.  
+We tried to find free online sources for all references, and list sources that informed Monique's thinking in the bibliography. Most of the Aristotle readings are on Perseus (Tufts), but Wikisource filled in some blanks.    
 
 
 Monique Tschofen is Professor of English at Toronto Metropolitan University. Find her at https://sites.google.com/view/moniquetschofen/ 
