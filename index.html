@@ -2,15 +2,9 @@
 <html lang="en">
 <head>
 <!--
-  A Blind Glass
-  a cursor-following lens that surfaces the philosophy hiding inside
-  Gertrude Stein's Tender Buttons (1914). move the glass — the words wake up.
-
-  Built in html with the intertext data in lexicon.json.
-  (Will make an inline copy further down as a fallback so it still runs off a
-  usb stick / file:// with no server.)
-  Spring 2026
-  Notes-to-self are scattered
+  June 29 2026: A Blind Glass: a cursor-following lens that surfaces the philosophy hiding inside Gertrude Stein's Tender Buttons (1914). Move the glass and the words wake up.
+  Built in html with the intertext data in lexicon.json. Forthcoming versions will expand the Stein verses and provide more commentary, possibly with a more scholarly apparatus tying the philosophers to Stein where possible. 
+Paper texture is taken from Stein's first edition. Libre Calson is close to the font she used. 
 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
@@ -40,6 +34,7 @@
     font-size:11pt; line-height:1.85;
     overflow-x:hidden; cursor:default;
   }
+<!-- M wanted the blind glass slightly opaque. I used turbulence --> 
   .grain,.vignette{position:fixed;inset:0;pointer-events:none;z-index:1}
   .grain{opacity:.06;mix-blend-mode:multiply;
     background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
@@ -112,6 +107,7 @@
   .tag .td{font-family:"Libre Caslon Text","EB Garamond",serif;font-variant:small-caps;font-size:.82rem;letter-spacing:.08em;color:var(--ink-soft);margin-top:.25em}
   .tag.on{opacity:1}
 
+  <!-- The lens effect:  -->
   .lens{position:fixed;left:0;top:0;z-index:55;width:calc(var(--lr)*2);height:calc(var(--lr)*2);border-radius:50%;
     margin-left:calc(var(--lr)*-1);margin-top:calc(var(--lr)*-1);pointer-events:none;will-change:transform;
     background:radial-gradient(circle at 38% 30%, rgba(255,253,247,.42), rgba(255,253,247,.10) 46%, rgba(255,253,247,0) 72%);
@@ -167,7 +163,7 @@
 
   @media (prefers-reduced-motion:reduce){*{transition-duration:.001ms !important}.t.active{transform:none}}
   @media (max-width:880px){
-    /* on a phone the panel would stack at the very bottom of the page (off-screen while
+    /* on a phone the panel stacks at the very bottom of the page (off-screen while
        reading), so pin it as a bottom sheet that rises when a word is surfaced */
     .gloss{position:fixed;left:0;right:0;bottom:0;top:auto;z-index:60;margin:0;max-height:64vh;overflow-y:auto;-webkit-overflow-scrolling:touch;transform:translateY(108%);transition:transform .28s ease}
     body.gloss-open .gloss{transform:translateY(0)}
@@ -189,6 +185,7 @@
         <figcaption><i>Tender Buttons</i><span class="plate-note">first edition · Claire Marie, 1914</span></figcaption>
       </figure>
     </div>
+    <!-- set up parts of the doc as "classes" which means they can be substituted easily  -->
     <p class="epigraph">“You should always paint knowledge which you have acquired….”<sup class="fn"><a id="ednref1" href="#edn1">i</a></sup><br><span class="src">Stein, “A Transatlantic Interview,” 31.</span></p>
     <p class="epigraph">“…nothing strange a single hurt color and an arrangement in a system to pointing.” <span class="src">Stein, “A Carafe, that is a Blind Glass,” <i>Tender Buttons</i>, 9.</span></p>
     <p class="intro"><i>Tender Buttons</i> can be understood as a linguistic experiment stretching the limits of language and the poetic genre, a scientific experiment stretching the limits of empirical observation, and even a psychological experiment in rendering in words the stream of consciousness. However, the poem’s importance comes into focus when it is understood as a radical philosophical experiment that offers a sustained critique of Western epistemology, its foundational postulates (such as knowledge, rationality, certainty, truth) as well as its methods (reasoning, measuring, believing). Pass the magnifying glass over Stein’s text to bring forth best guesses at her web of philosophical intertexts.</p>
@@ -316,7 +313,7 @@
 
 <script type="application/json" id="lexicon-data">
 {
-  "_about": "Lexicon for 'A Blind Glass'. Tag a word in a passage with [[word]]; give it a different entry id with [[visible text|id]]. Ids match lower-cased. Type is 'concept' or 'verb'. Use … for elision. A passage with an empty title continues under the previous heading. An entry may carry an optional 'alt' list of alternate readings, each an object with its own gloss and source link (g, u, and optionally c, s, d); with Diffraction on, the glass can surface the primary reading or any alternate.",
+  "_about": "Lexicon for 'A Blind Glass'. Tag a word in a passage with [[word]]; give it a different entry id with [[visible text|id]]. Ids match lower-cased. Type is 'concept' or 'verb'. Use … for elision. A passage with an empty title continues under the previous heading. An entry may carry an optional 'alt' list of alternate readings, with its own gloss and source link (g, u, and optionally c, s, d); with Diffraction on, the glass can surface the primary reading or any alternate.",
   "entries": {
     "makes": {"c":"Making — poiēsis (ποίησις)","s":"Aristotle, <i>Nicomachean Ethics</i> VI.4, 1140a","d":"c. 350 BCE","g":"Stein is thinking about poiēsis in the context of long debates about the difference between poetry and things made by hand: “Making is different from doing” (<i>Nicomachean Ethics</i> 1140a, trans. Rackham). For Aristotle, poiēsis, whose end is a product, is contrasted to praxis (πρᾶξις), whose end is the act itself. The cause of the made thing lies in the maker, not the made. Behind Stein’s refrain ‘all this makes —’, is the maker’s art.","u":"https://www.perseus.tufts.edu/hopper/text?doc=Perseus:text:1999.01.0054:bekker+page%3D1140a","t":"verb","alt":[{"c":"Making — <i>factum</i>","s":"Vico, <i>De Antiquissima Sapientia</i>","d":"1710","t":"verb","g":"Vico in <i>De Antiquissima Sapientia</i> talks about “the maker’s knowledge” and argues that true learning is what is made with the hands: “verum ipsum factum — the truth is the made” (trans. Costelloe). According to Vico, we know something most fully when we have made it ourselves. God knows nature because God made it; humans know mathematics, institutions, laws, languages, and history because humans made them.","u":"https://it.wikisource.org/wiki/De_antiquissima_italorum_sapientia"}]},
     "system": {"c":"System — systēma (σύστημα)","s":"Aristotle, <i>Sophistical Refutations</i> 184b2–8","d":"c. 350 BCE","g":"For Aristotle, knowledge is not a heap of facts but a system (systēma, a ‘standing-together’) with each science a demonstrative order rising from its own first principles, and inquiry as a whole divided into the theoretical, the practical, and the productive. To understand a thing is to see where it stands within that ordered whole: “Once you have surveyed our work, if it seems to you that our system has developed adequately in comparison with other treatments arising from the tradition to date — bearing in mind how things were at the beginning of our inquiry — it falls to you, our students, to be indulgent with respect to any omissions in our system, and to feel a great debt of gratitude for the discoveries it contains” (<i>Sophistical Refutations</i> 184b2–8, in Shields).","u":"https://plato.stanford.edu/entries/aristotle/","t":"concept","alt":[{"c":"System — the Architectonic","s":"Kant, <i>Critique of Pure Reason</i> A832/B860","d":"1781","g":"Kant: “By the term Architectonic I mean the art of constructing a system. Without systematic unity, our knowledge cannot become science; it will be an aggregate, and not a system. Thus Architectonic is the doctrine of the scientific in cognition, and therefore necessarily forms part of our Methodology” (<i>Critique of Pure Reason</i> A832/B860, trans. Meiklejohn). See Kreines 2024.","u":"https://en.wikisource.org/wiki/Critique_of_Pure_Reason_(Meiklejohn)/Volume_2/Chapter_3"}]},
@@ -377,7 +374,8 @@
   },
   "sections": [
     {
-      "title": "Objects",
+<!-- Just picked some easy Stein passages to start; build this out with longer passages and more quotes -->
+  "title": "Objects",
       "passages": [
         {"title":"A Carafe, that is a Blind Glass","text":"A kind in glass and a cousin, a spectacle and nothing strange a single hurt color and an arrangement in a [[system]] to pointing. All this and not ordinary, not unordered in not [[resembling]]. The [[difference]] is spreading."},
         {"title":"Glazed Glitter","text":"There is no search. But there is, there is that hope and that [[interpretation]] and sometime, surely any is unwelcome, sometime there is breath and there will be a sinecure."},
@@ -436,8 +434,8 @@
 
 <script>
 (async function(){
-  // try the external lexicon first; if the fetch dies (file://, offline, fat-fingered path)
-  // fall back to the copy baked into the page so the thing always runs.
+  // try the external lexicon first; if the fetch dies (file://, offline path)
+  // fall back to the copy bakedinto the page so the thing always runs.
   const FALLBACK = JSON.parse(document.getElementById('lexicon-data').textContent);
   async function getLexicon(){
     try{ const r = await fetch('lexicon.json',{cache:'no-store'}); if(!r.ok) throw 0; return await r.json(); }
@@ -463,7 +461,7 @@
   // diffraction is data, not code: an entry with a non-empty "alt" array carries
   // alternate *readings* — each its own gloss + source. while the glass lingers on
   // such a word, the card drifts to the next reading on a timer (no toggle, no
-  // authoritative reading). each alt is an object {g, u, and optionally c, s, d};
+  // authoritative reading). each alt is organized as another object {g, u, and optionally c, s, d};
   // unset fields inherit the primary entry. edit the "alt" arrays in lexicon.json.
   const DIFFRACT = {};   // baseId -> [primary reading, ...alternate readings]
   for(const id in ENTRIES){
@@ -505,7 +503,7 @@
   document.body.classList.toggle('coarse', coarse);
   document.getElementById('howto-text').textContent = coarse ? 'Tap a highlighted word to surface its philosophy.' : 'Move your cursor — the glass follows.';
 
-  // desktop: the glass just trails the cursor.
+  // on a desktop, the glass just trails the cursor.
   window.addEventListener('mousemove', e=>{ tx=e.clientX; ty=e.clientY; });
 
   // touch: grab-and-drag. the lens needs touch-action:none in the css above,
@@ -538,7 +536,7 @@
 
   if(coarse){
     // start the glass in the middle of the screen so it's always visible and reachable —
-    // the masthead is tall on a phone, so the first passage can sit well below the fold
+    // put the masthead below the fold on iphone
     tx=window.innerWidth/2; ty=window.innerHeight*0.5; cx=tx; cy=ty;
   }
 
@@ -585,7 +583,7 @@
     } else { gSrc.style.display='none'; }
     gChip.textContent = e.t==='verb' ? 'a verb of thinking' : 'philosophical concept';
     updateRefract(baseId);
-    scheduleLinger(el, i, readings.length);   // keep drifting while the glass lingers
+    scheduleLinger(el, i, readings.length);   // to keep drifting while the glass lingers
   }
   function updateRefract(baseId){
     const readings = DIFFRACT[baseId];
@@ -626,7 +624,7 @@
         if(shownEntry){ tagC.textContent=shownEntry.c; tagD.textContent=shownEntry.d;
           tag.style.setProperty('--tagbleed', shownEntry.t==='verb'?'var(--sienna)':'var(--verdigris)'); }
       } else {
-        clearLinger();   // glass left the word: stop drifting, keep the last reading on the card
+        clearLinger();   // if the glass leaves the word, stop drifting, and keep the last reading on the card
       }
       lastFocus=focus;
     }
